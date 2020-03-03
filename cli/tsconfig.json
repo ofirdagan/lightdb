@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es6",
+    "outDir": "./dist",
+    "baseUrl": "./src"
+  },
+  "include": [
+    "cli/src/**/*.ts"
+  ],
+  "exclude": [
+    "../node_modules"
+  ]
+}
