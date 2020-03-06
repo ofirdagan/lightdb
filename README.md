@@ -8,7 +8,7 @@ POST /registerUser
 ```
 
 Body: 
-```
+```typescript
 {
     email: string
 }
@@ -18,7 +18,7 @@ Body:
 POST /verifyCode 
 ```
 Body: 
-```
+```typescript
 {
     email: string,
     code: string
@@ -26,7 +26,7 @@ Body:
 ```
 
 Returns:
-```
+```typescript
 {
     token: string
 }
@@ -36,19 +36,19 @@ Returns:
 POST /newKey 
 ```
 Body: 
-```
+```typescript
 {
     name?: string //optional
 }
 ```
 Headers: 
-```
+```typescript
 {
     authorization: <token>
 }
 ```
 Returns:
-```
+```typescript
 {
     key: string
 }
@@ -58,19 +58,19 @@ Returns:
 POST /setValue/<key> 
 ```
 Body: 
-```
+```typescript
 {
     value: any
 }
 ```
 Headers: 
-```
+```typescript
 {
     authorization: <token>
 }
 ```
 Returns:
-```
+```typescript
 {
     key: string,
     value: any
@@ -81,7 +81,7 @@ Returns:
 GET /key/<key> 
 ```
 Returns:
-```
+```typescript
 <any>
 ```
 ---
@@ -95,7 +95,7 @@ Headers:
 }
 ```
 Returns:
-```
+```typescript
 [
     key: string,
     name: string
@@ -107,12 +107,12 @@ Returns:
 POST /logout 
 ```
 Headers: 
-```
+```typescript
 {
     authorization: <token>
 }
 ```
 Returns:
-```
+```typescript
 <string>
 ```
