@@ -64,6 +64,13 @@ function withTryCatch(func: Function) {
   }
 }
 
+async function defaultCommand() {
+  const serverApi = getServerApi();
+  await verifyLoggedIn(serverApi);
+  program.help();
+}
+
+
 function getServerApi() {
   const isDebug = !!program.debug;
   const isLoggedIn = fs.existsSync(`.light-db`);
@@ -79,5 +86,11 @@ async function verifyLoggedIn(serverApi: ServerApi) {
   }
 }
 
+
 program.parse(process.argv);
+const NO_COMMAND_SPECIFIED = !process.argv.slice(2).length;
+if (NO_COMMAND_SPECIFIED) {
+  defaultCommand();
+}
+
 
