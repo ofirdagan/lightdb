@@ -1,6 +1,6 @@
 ## LightDB
 
-### API
+#### Register
 
 
 ```
@@ -14,6 +14,7 @@ Body:
 }
 ```
 ---
+#### Verify Code
 ```
 POST /verifyCode 
 ```
@@ -32,6 +33,7 @@ Returns:
 }
 ```
 ---
+#### New Key
 ```
 POST /newKey 
 ```
@@ -54,6 +56,7 @@ Returns:
 }
 ```
 ---
+#### Set Value
 ```
 POST /setValue/<key> 
 ```
@@ -77,6 +80,7 @@ Returns:
 }
 ```
 ---
+#### Get Value
 ```
 GET /key/<key> 
 ```
@@ -85,6 +89,7 @@ Returns:
 <any>
 ```
 ---
+#### Keys's List
 ```
 GET /list 
 ```
@@ -103,6 +108,7 @@ Returns:
 ]
 ```
 ---
+#### Logout
 ```
 POST /logout 
 ```
