@@ -9,12 +9,16 @@ export const register = async (serverApi: ServerApi) => {
   console.log(chalk.cyan(figlet.textSync('LIGHT DB', {horizontalLayout: 'full'})));
 
   const email = await readEmailFromInput();
-  await serverApi.register(email);
+  try {
+    await serverApi.register(email);
+    const verificationCode = await readVerificationCodeFromInput();
+    const token = await serverApi.verify(email, verificationCode);
+    console.log(`Great, we're all good and ready to go.. run `, chalk.yellow(`lightdb new --name='your key name'`), ` to get your first key!`);
+    console.log(`\nYou can also save the following token and use the REST API\n`, chalk.yellow(token));  
+  } catch(e) {
+    console.log(chalk.red(e));
+  }
 
-  const verificationCode = await readVerificationCodeFromInput();
-  const token = await serverApi.verify(email, verificationCode);
-  console.log(`Great, we're all good and ready to go.. run `, chalk.yellow(`lightdb new --name='your key name'`), ` to get your first key!`);
-  console.log(`\nYou can also save the following token and use the REST API\n`, chalk.yellow(token));
 };
 
 async function readEmailFromInput() {

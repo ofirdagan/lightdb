@@ -1,5 +1,6 @@
 import axios from 'axios';
 import fs from 'fs';
+import {BASE_URL} from '../constants';
 
 class ServerApi {
   private baseUrl: string;
@@ -8,7 +9,7 @@ class ServerApi {
   constructor(debug: boolean, token?: string) {
     const suffix = debug ? `-dev`: ``;
     if (debug) console.log(`Running in debug mode: ${debug}`);
-    this.baseUrl = `https://www.lightdb.org/_functions${suffix}`;
+    this.baseUrl = `${BASE_URL}/_functions${suffix}`;
     this.token = token;
   }
 

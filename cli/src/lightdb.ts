@@ -2,6 +2,7 @@ import fs from 'fs';
 import ServerApi from './services/server-api';
 import {register} from './services/register';
 import chalk from 'chalk';
+import { BASE_URL } from './constants';
 const commander =  require('commander');
 
 const program = new commander.Command();
@@ -20,7 +21,7 @@ program
     const key = await serverApi.generateNewKey(newCmd.name);
     console.log(`New key is: ${chalk.cyan(key)}`);
     console.log(`To set a value run:`);
-    console.log(chalk.yellow(`curl 'https://www.lightdb.org/_functions/setValue/${key}' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' -H 'authorization: ${serverApi.getToken()}' -H 'Content-Type: application/json' --data-binary '{"value":{"lastName":"Bond","firstName":"James"}}' --compressed`));
+    console.log(chalk.yellow(`curl '${BASE_URL}/_functions/setValue/${key}' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' -H 'authorization: ${serverApi.getToken()}' -H 'Content-Type: application/json' --data-binary '{"value":{"lastName":"Bond","firstName":"James"}}' --compressed`));
   }));
 
 program
