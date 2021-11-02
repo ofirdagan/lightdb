@@ -1,6 +1,6 @@
 {
   "name": "@ofirdagan/lightdb",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Simple and free key value store as a service with CLI and full REST support",
   "main": "cli/src/index.js",
   "scripts": {

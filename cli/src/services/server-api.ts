@@ -67,7 +67,7 @@ class ServerApi {
         authorization: this.token
       }
     });
-    fs.unlinkSync('.light-db');
+    fs.unlinkSync(TOKEN_PATH);
     return res.data;
   }
 }
