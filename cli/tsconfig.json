@@ -3,12 +3,14 @@
     "esModuleInterop": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es6",
+    "lib": ["ES2019"],
+    "module": "commonjs",
+    "target": "ES2019",
     "outDir": "./dist",
     "baseUrl": "./src"
   },
   "include": [
-    "cli/src/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "../node_modules"

@@ -1,8 +1,9 @@
+#!/usr/bin/env node
 import fs from 'fs';
 import ServerApi from './services/server-api';
 import {register} from './services/register';
 import chalk from 'chalk';
-import { BASE_URL } from './constants';
+import {BASE_URL, TOKEN_PATH} from './constants';
 const commander =  require('commander');
 
 const program = new commander.Command();
@@ -36,7 +37,7 @@ program
 
 program
   .command('get')
-  .description(`Get the value of <key>`)
+  .description(`Get the value of <key>. Use -k or --key`)
   .option('-k, --key <key>', 'key')
   .action(withTryCatch(async (getCmd) => {
     const serverApi = getServerApi();
@@ -74,13 +75,13 @@ async function defaultCommand() {
 
 function getServerApi() {
   const isDebug = !!program.debug;
-  const isLoggedIn = fs.existsSync(`.light-db`);
-  const token = isLoggedIn ? fs.readFileSync('.light-db', 'utf8'): null;
+  const isLoggedIn = fs.existsSync(TOKEN_PATH);
+  const token = isLoggedIn ? fs.readFileSync(TOKEN_PATH, 'utf8'): null;
   return new ServerApi(isDebug, token);
 }
 
 async function verifyLoggedIn(serverApi: ServerApi) {
-  const isLoggedIn = fs.existsSync(`.light-db`);
+  const isLoggedIn = fs.existsSync(TOKEN_PATH);
   if (!isLoggedIn) {
     await register(serverApi);
     process.exit(0);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import fs from 'fs';
-import {BASE_URL} from '../constants';
+import {BASE_URL, TOKEN_PATH} from '../constants';
 
 class ServerApi {
   private baseUrl: string;
@@ -26,7 +26,7 @@ class ServerApi {
     const res = await axios.post(`${this.baseUrl}/verifyCode`, {email, code});
     const token = res.data.token;
     this.token = token;
-    fs.writeFileSync('.light-db', token);
+    fs.writeFileSync(TOKEN_PATH, token);
     return token;
   }
 
