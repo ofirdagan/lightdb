@@ -19,4 +19,4 @@ const get = async (key: string) => {
   console.log(`Result- `, res.data);
 };
 
-get(`d573cc94-3ae9-43b7-8166-926a1680f438`);
+get(``);
