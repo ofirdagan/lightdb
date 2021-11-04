@@ -2,8 +2,3 @@ node_modules
 .idea
 dist
 package-lock.json
-.light-db
-.corvid
-server
-.metadata.json
-corvid-package.json

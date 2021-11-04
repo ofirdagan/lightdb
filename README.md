@@ -1,5 +1,9 @@
 ## LightDB
 
+#### CLI
+* `npm i -g @ofirdagan/lightdb`
+* In terminal run `lightdb`
+
 #### Register
 
 
