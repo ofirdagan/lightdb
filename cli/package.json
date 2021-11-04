@@ -18,7 +18,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.24.0",
     "chalk": "^3.0.0",
     "commander": "^4.1.1",
     "email-validator": "^2.0.4",
