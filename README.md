@@ -1,11 +1,12 @@
 ## LightDB
 
-#### CLI
+### CLI
 * `npm i -g @ofirdagan/lightdb`
 * In terminal run `lightdb`
 
-#### Register
+### REST API
 
+#### Register
 
 ```
 POST /registerUser
