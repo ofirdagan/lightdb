@@ -6,7 +6,7 @@ const set = async (key:string, value: any) => {
   const token = ``;
   const res = await axios.post(`${baseUrl}/setValue/${key}`, {value}, {
     headers: {
-      authorization: this.token
+      authorization: token
     }
   });
   console.log(`Result- `, res.data);

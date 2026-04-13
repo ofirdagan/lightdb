@@ -1,8 +1,8 @@
 {
   "name": "@ofirdagan/lightdb",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Simple and free key value store as a service with CLI and full REST support",
-  "main": "cli/src/index.js",
+  "main": "dist/lightdb.js",
   "scripts": {
     "start": "ts-node src/lightdb -d",
     "build": "tsc",
@@ -18,17 +18,16 @@
     "registry": "https://registry.npmjs.org"
   },
   "dependencies": {
-    "axios": "^0.24.0",
-    "chalk": "^3.0.0",
-    "commander": "^4.1.1",
+    "axios": "^1.15.0",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3",
     "email-validator": "^2.0.4",
-    "figlet": "^1.3.0",
-    "inquirer": "^7.0.4"
+    "figlet": "^1.11.0",
+    "inquirer": "^13.4.1"
   },
   "devDependencies": {
-    "typescript": "^3.8.2",
-    "@types/inquirer": "^6.5.0",
-    "@types/node": "^13.7.7",
-    "ts-node": "^8.6.2"
+    "@types/node": "^25.6.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
   }
 }

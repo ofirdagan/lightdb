@@ -4,7 +4,7 @@ import {BASE_URL, TOKEN_PATH} from '../constants';
 
 class ServerApi {
   private baseUrl: string;
-  private token: string;
+  private token?: string;
 
   constructor(debug: boolean, token?: string) {
     const suffix = debug ? `-dev`: ``;
@@ -13,7 +13,7 @@ class ServerApi {
     this.token = token;
   }
 
-  getToken(): string {
+  getToken(): string | undefined {
     return this.token;
   }
 

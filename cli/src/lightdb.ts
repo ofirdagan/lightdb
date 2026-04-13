@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 import fs from 'fs';
+import { Command } from 'commander';
 import ServerApi from './services/server-api';
+import { getChalk } from './services/runtime-deps';
 import {register} from './services/register';
-import chalk from 'chalk';
 import {BASE_URL, TOKEN_PATH} from './constants';
-const commander =  require('commander');
 
-const program = new commander.Command();
+const program = new Command();
 program.version('1.0.0');
 
 program
@@ -16,10 +16,11 @@ program
   .command('new')
   .option('-n, --name <name>', 'set a human readable name (optional)')
   .description('Generate a new key. Use --name to set a nickname')
-  .action(withTryCatch(async (newCmd) => {
+  .action(withTryCatch(async (options) => {
+    const chalk = await getChalk();
     const serverApi = getServerApi();
     await verifyLoggedIn(serverApi);
-    const key = await serverApi.generateNewKey(newCmd.name);
+    const key = await serverApi.generateNewKey(options.name);
     console.log(`New key is: ${chalk.cyan(key)}`);
     console.log(`To set a value run:`);
     console.log(chalk.yellow(`curl '${BASE_URL}/_functions/setValue/${key}' -H 'Pragma: no-cache' -H 'Cache-Control: no-cache' -H 'authorization: ${serverApi.getToken()}' -H 'Content-Type: application/json' --data-binary '{"value":{"lastName":"Bond","firstName":"James"}}' --compressed`));
@@ -39,9 +40,9 @@ program
   .command('get')
   .description(`Get the value of <key>. Use -k or --key`)
   .option('-k, --key <key>', 'key')
-  .action(withTryCatch(async (getCmd) => {
+  .action(withTryCatch(async (options) => {
     const serverApi = getServerApi();
-    const value = await serverApi.get(getCmd.key);
+    const value = await serverApi.get(options.key);
     console.log(value);
   }));
 
@@ -49,6 +50,7 @@ program
   .command('logout')
   .description(`You won't be able to set new keys but the one you have will still be available publicly`)
   .action(withTryCatch(async () => {
+    const chalk = await getChalk();
     const serverApi = getServerApi();
     await verifyLoggedIn(serverApi);
     const message = await serverApi.logout();
@@ -56,12 +58,13 @@ program
   }));
 
 
-function withTryCatch(func: Function) {
-  return async function(...args) {
+function withTryCatch<T extends unknown[]>(func: (...args: T) => Promise<void>) {
+  return async function(this: unknown, ...args: T) {
     try {
       await func.apply(this, args);
-    } catch (e) {
-      console.log(`Error calling ${func.name}: ${e.message}`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      console.log(`Error calling ${func.name}: ${message}`);
     }
   }
 }
@@ -74,9 +77,9 @@ async function defaultCommand() {
 
 
 function getServerApi() {
-  const isDebug = !!program.debug;
+  const isDebug = !!program.opts().debug;
   const isLoggedIn = fs.existsSync(TOKEN_PATH);
-  const token = isLoggedIn ? fs.readFileSync(TOKEN_PATH, 'utf8'): null;
+  const token = isLoggedIn ? fs.readFileSync(TOKEN_PATH, 'utf8') : undefined;
   return new ServerApi(isDebug, token);
 }
 
@@ -94,5 +97,3 @@ const NO_COMMAND_SPECIFIED = !process.argv.slice(2).length;
 if (NO_COMMAND_SPECIFIED) {
   defaultCommand();
 }
-
-

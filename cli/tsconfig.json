@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node16",
     "sourceMap": true,
-    "lib": ["ES2019"],
-    "module": "commonjs",
-    "target": "ES2019",
+    "lib": ["ES2023", "DOM"],
+    "module": "Node16",
+    "target": "ES2022",
     "outDir": "./dist",
-    "baseUrl": "./src"
+    "rootDir": "./src",
+    "types": ["node"],
+    "strict": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts"
